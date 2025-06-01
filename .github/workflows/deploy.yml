@@ -10,24 +10,23 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: Mind-care-ai  # 👈 Add this line
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       - name: Install dependencies
         run: npm install
+        working-directory: Backend
 
       - name: Run tests
         run: npm test
+        working-directory: Backend
 
       - name: Build the app
         run: npm run build
+        working-directory: Backend

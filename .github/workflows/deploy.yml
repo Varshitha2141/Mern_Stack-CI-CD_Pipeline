@@ -1,37 +1,27 @@
-name: MindCare AI - CI/CD Pipeline
+name: Build and Deploy Backend
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Repository
+      - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
-      - name: 🔧 Setup Node.js
+      - name: 🟢 Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       - name: 📦 Install Dependencies (Backend)
         run: npm install
-        working-directory: ./Backend
+        working-directory: ./Mind-care-ai/Backend
 
-      - name: ✅ Run Backend Build (Optional)
+      - name: ✅ Run Backend Build
         run: npm run build
-        working-directory: ./Backend
-        continue-on-error: true  # Remove this line if build must not fail
-
-      # Optional: You can add test step here
-      - name: 🧪 Run Tests
-        run: npm test
-        working-directory: ./Backend
-
-      - name: 🚀 Deployment Step (Optional)
-        run: echo "Deploy logic goes here"
+        working-directory: ./Mind-care-ai/Backend

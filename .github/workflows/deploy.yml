@@ -1,33 +1,28 @@
-name: Build and Deploy Backend
+name: Build and Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: Backend
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Debug working directory
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Files and folders:"
+        ls -R
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install backend dependencies
+      run: npm install
+      working-directory: ./Backend  # Make sure this matches your folder
 
-      - name: Run build
-        run: npm run build
-
-      # Optional: Add test step if you have tests
-      - name: Run tests
-        run: npm test
+    - name: Run backend build (optional)
+      run: npm run build
+      working-directory: ./Backend

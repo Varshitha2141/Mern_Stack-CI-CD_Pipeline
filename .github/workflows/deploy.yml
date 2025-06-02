@@ -21,8 +21,8 @@ jobs:
 
     - name: Install backend dependencies
       run: npm install
-      working-directory: ./Backend  # Make sure this matches your folder
+      working-directory: ./backend  # Make sure this matches your folder
 
     - name: Run backend build (optional)
       run: npm run build
-      working-directory: ./Backend
+      working-directory: ./backend
